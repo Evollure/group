@@ -1,0 +1,1071 @@
+<html lang="pt-BR" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evollure Group | AI Sales Agency</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.cdnfonts.com/css/pp-neue-montreal" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <style>
+        :root {
+            --void: #050505;
+            --c950: #0A0A0A;
+            --c900: #111111;
+            --c800: #1A1A1A;
+            --c700: #242424;
+            --ember: #E8570F;
+            --ember-hover: #F07A3E;
+            --text-main: #FFFFFF;
+            --text-sec: #999999;
+            --text-muted: #555555;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--text-main);
+            font-family: 'PP Neue Montreal', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* Utilities */
+        ::selection { background-color: var(--ember); color: white; }
+        .text-balance { text-wrap: balance; }
+        
+        /* Background Patterns */
+        .bg-grid {
+            background-image: linear-gradient(to right, rgba(232, 87, 15, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(232, 87, 15, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        
+        .glow-ember {
+            background: radial-gradient(circle at center, rgba(232, 87, 15, 0.08) 0%, transparent 60%);
+        }
+        .glow-ember-strong {
+            background: radial-gradient(circle at center, rgba(232, 87, 15, 0.12) 0%, transparent 70%);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+        .path-draw {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawPath 2s ease-out forwards;
+        }
+
+        /* Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+            opacity: 0;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--ember);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--void); }
+        ::-webkit-scrollbar-thumb { background: var(--c800); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--c700); }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-[#E8570F] selection:text-white">
+
+    <!-- Nav -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 h-16 border-b border-transparent flex items-center">
+        <div class="max-w-[960px] mx-auto w-full px-8 flex justify-between items-center">
+            <div class="flex items-center gap-[3px]">
+                <svg viewBox="0 0 120 120" class="w-7 h-7 text-[#E8570F]">
+                    <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="4"></ellipse>
+                    <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3.5" transform="rotate(60 60 60)" opacity="0.65"></ellipse>
+                    <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3" transform="rotate(120 60 60)" opacity="0.35"></ellipse>
+                    <circle cx="60" cy="60" r="6" fill="currentColor"></circle>
+                </svg>
+                <span class="text-lg tracking-tight font-normal">Evollure</span>
+                <span class="font-mono text-xs uppercase tracking-widest text-[#E8570F] bg-[#E8570F]/10 px-2 py-0.5 rounded-full ml-1">Group</span>
+            </div>
+            
+            <div class="flex items-center gap-3 md:hidden">
+                <a href="#cta" class="text-xs font-semibold tracking-tight bg-[#E8570F] text-white px-4 py-2 hover:bg-white hover:text-[#050505] transition-colors">Fale Conosco</a>
+                <button id="menu-toggle" class="flex flex-col justify-center items-center w-8 h-8 gap-[5px] group" aria-label="Menu">
+                    <span class="block w-5 h-[2px] bg-[#999999] transition-all duration-300 origin-center" id="bar1"></span>
+                    <span class="block w-5 h-[2px] bg-[#999999] transition-all duration-300" id="bar2"></span>
+                    <span class="block w-5 h-[2px] bg-[#999999] transition-all duration-300 origin-center" id="bar3"></span>
+                </button>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#solucoes" class="text-sm text-[#999999] hover:text-white transition-colors">Nosso Método</a>
+                <a href="#para-quem" class="text-sm text-[#999999] hover:text-white transition-colors">Para Quem</a>
+                <a href="#faq" class="text-sm text-[#999999] hover:text-white transition-colors">FAQ</a>
+                <a href="#cta" class="text-sm font-semibold tracking-tight text-[#E8570F] hover:text-white transition-colors">Fale Conosco</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 w-full bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#1A1A1A]">
+            <div class="max-w-[960px] mx-auto px-8 py-6 flex flex-col gap-4">
+                <a href="#solucoes" class="text-sm text-[#999999] hover:text-white transition-colors mobile-menu-link">Nosso Método</a>
+                <a href="#para-quem" class="text-sm text-[#999999] hover:text-white transition-colors mobile-menu-link">Para Quem</a>
+                <a href="#faq" class="text-sm text-[#999999] hover:text-white transition-colors mobile-menu-link">FAQ</a>
+                <a href="#cta" class="text-sm font-semibold tracking-tight text-[#E8570F] hover:text-white transition-colors mobile-menu-link">Fale Conosco</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden bg-grid">
+        <div class="absolute inset-0 glow-ember opacity-80 z-0"></div>
+        
+        <div class="max-w-[960px] mx-auto px-8 w-full relative z-10 grid md:grid-cols-12 gap-12 items-center">
+            
+            <div class="md:col-span-7 flex flex-col items-start">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#555555] mb-6 reveal">AI Sales Agency</span>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-tight mb-6 text-balance reveal" style="transition-delay: 100ms;">
+                    Inteligência artificial <br>
+                    projetada sob medida <br>
+                    <em class="text-[#E8570F] not-italic italic font-semibold">para o seu negócio.</em>
+                </h1>
+                
+                <p class="text-base md:text-lg text-[#999999] mb-10 max-w-md leading-relaxed reveal" style="transition-delay: 200ms;">
+                    Projetamos soluções de inteligência artificial que se adaptam ao seu processo, aos seus critérios e aos seus objetivos. Nada de prateleira.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto reveal" style="transition-delay: 300ms;">
+                    <a href="#cta" class="bg-[#E8570F] text-white px-8 py-3.5 text-sm font-semibold rounded-none hover:bg-white hover:text-[#050505] transition-colors duration-250 flex justify-center items-center">
+                        Falar com a Evollure
+                    </a>
+                    <a href="#solucoes" class="bg-transparent text-white border border-[#242424] px-8 py-3.5 text-sm font-semibold rounded-none hover:border-[#E8570F] hover:text-[#E8570F] transition-colors duration-250 flex justify-center items-center gap-2">
+                        Conhecer soluções <iconify-icon icon="solar:arrow-down-linear" width="16"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero SVG Ecosystem -->
+            <div class="md:col-span-5 relative h-[300px] md:h-[450px] w-full reveal" style="transition-delay: 400ms;">
+                <svg viewBox="0 0 400 430" class="w-full h-full drop-shadow-2xl">
+                    <defs>
+                        <!-- Glow filter for energy particles -->
+                        <filter id="energyGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <!-- Gradient that fades particle at the ends -->
+                        <radialGradient id="particleGrad">
+                            <stop offset="0%" stop-color="#E8570F" stop-opacity="1"/>
+                            <stop offset="100%" stop-color="#E8570F" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Connection paths (base lines) -->
+                    <!-- Path to Inteligência (top-left) — from center outward, stopping at sphere edge -->
+                    <path id="pathLeft" d="M200 225 Q 140 172 108 148" fill="none" stroke="#242424" stroke-width="1.5" stroke-dasharray="4 4"></path>
+                    <!-- Path to Aquisição (top-right) — from center outward, stopping at sphere edge -->
+                    <path id="pathRight" d="M200 225 Q 260 172 292 148" fill="none" stroke="#242424" stroke-width="1.5" stroke-dasharray="4 4"></path>
+                    <!-- Path to Sob Medida (bottom) — from center outward, stopping at sphere edge -->
+                    <path id="pathBottom" d="M200 225 Q 200 298 200 342" fill="none" stroke="#242424" stroke-width="1.5" stroke-dasharray="4 4"></path>
+
+                    <!-- Energy particles flowing from center to spheres -->
+                    <!-- Particle 1 → Inteligência -->
+                    <circle r="3" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="0s">
+                            <mpath href="#pathLeft"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+                        <animate attributeName="r" values="2;3.5;2" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+                    </circle>
+                    <circle r="2" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s">
+                            <mpath href="#pathLeft"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+                        <animate attributeName="r" values="1.5;2.5;1.5" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+                    </circle>
+
+                    <!-- Particle 2 → Aquisição -->
+                    <circle r="3" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="0.4s">
+                            <mpath href="#pathRight"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+                        <animate attributeName="r" values="2;3.5;2" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+                    </circle>
+                    <circle r="2" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.6s">
+                            <mpath href="#pathRight"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="1.6s"/>
+                        <animate attributeName="r" values="1.5;2.5;1.5" dur="2.4s" repeatCount="indefinite" begin="1.6s"/>
+                    </circle>
+
+                    <!-- Particle 3 → Sob Medida -->
+                    <circle r="3" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="0.8s">
+                            <mpath href="#pathBottom"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+                        <animate attributeName="r" values="2;3.5;2" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+                    </circle>
+                    <circle r="2" fill="#E8570F" opacity="0" filter="url(#energyGlow)">
+                        <animateMotion dur="2.4s" repeatCount="indefinite" begin="2s">
+                            <mpath href="#pathBottom"/>
+                        </animateMotion>
+                        <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.1;0.8;1" dur="2.4s" repeatCount="indefinite" begin="2s"/>
+                        <animate attributeName="r" values="1.5;2.5;1.5" dur="2.4s" repeatCount="indefinite" begin="2s"/>
+                    </circle>
+                    
+                    <!-- Node: Inteligência (top-left) -->
+                    <g>
+                        <circle cx="80" cy="120" r="28" fill="#111111" stroke="#242424" stroke-width="1.5"></circle>
+                        <circle cx="80" cy="120" r="28" fill="none" stroke="rgba(232,87,15,0.15)" stroke-width="1"></circle>
+                        <!-- Chip/CPU icon -->
+                        <g transform="translate(68, 108)" fill="none" stroke="#E8570F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Chip body -->
+                            <rect x="5" y="5" width="14" height="14" rx="1.5"/>
+                            <!-- Inner square -->
+                            <rect x="8.5" y="8.5" width="7" height="7" rx="1"/>
+                            <!-- Pins top -->
+                            <line x1="9" y1="2" x2="9" y2="5"/>
+                            <line x1="12" y1="2" x2="12" y2="5"/>
+                            <line x1="15" y1="2" x2="15" y2="5"/>
+                            <!-- Pins bottom -->
+                            <line x1="9" y1="19" x2="9" y2="22"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                            <line x1="15" y1="19" x2="15" y2="22"/>
+                            <!-- Pins left -->
+                            <line x1="2" y1="9" x2="5" y2="9"/>
+                            <line x1="2" y1="12" x2="5" y2="12"/>
+                            <line x1="2" y1="15" x2="5" y2="15"/>
+                            <!-- Pins right -->
+                            <line x1="19" y1="9" x2="22" y2="9"/>
+                            <line x1="19" y1="12" x2="22" y2="12"/>
+                            <line x1="19" y1="15" x2="22" y2="15"/>
+                        </g>
+                        <!-- Label -->
+                        <text x="80" y="162" text-anchor="middle" fill="#999999" font-family="'IBM Plex Mono', monospace" font-size="9" letter-spacing="1.5" text-transform="uppercase">INTELIGÊNCIA</text>
+                    </g>
+
+                    <!-- Node: Aquisição (top-right) -->
+                    <g>
+                        <circle cx="320" cy="120" r="28" fill="#111111" stroke="#242424" stroke-width="1.5"></circle>
+                        <circle cx="320" cy="120" r="28" fill="none" stroke="rgba(232,87,15,0.15)" stroke-width="1"></circle>
+                        <!-- Target/Magnet icon (aquisição) -->
+                        <g transform="translate(307, 107)" fill="none" stroke="#E8570F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="13" cy="13" r="12"/>
+                            <circle cx="13" cy="13" r="8"/>
+                            <circle cx="13" cy="13" r="4"/>
+                            <line x1="13" y1="1" x2="13" y2="5"/>
+                            <line x1="25" y1="13" x2="21" y2="13"/>
+                        </g>
+                        <!-- Label -->
+                        <text x="320" y="162" text-anchor="middle" fill="#999999" font-family="'IBM Plex Mono', monospace" font-size="9" letter-spacing="1.5">AQUISIÇÃO</text>
+                    </g>
+
+                    <!-- Node: Sob Medida (bottom) -->
+                    <g>
+                        <circle cx="200" cy="370" r="28" fill="#111111" stroke="#242424" stroke-width="1.5"></circle>
+                        <circle cx="200" cy="370" r="28" fill="none" stroke="rgba(232,87,15,0.15)" stroke-width="1"></circle>
+                        <!-- Sliders/settings icon (personalização) -->
+                        <g transform="translate(188, 358)" fill="none" stroke="#E8570F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="1" x2="4" y2="23"/>
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <line x1="20" y1="1" x2="20" y2="23"/>
+                            <circle cx="4" cy="8" r="2.5" fill="#111111"/>
+                            <circle cx="12" cy="16" r="2.5" fill="#111111"/>
+                            <circle cx="20" cy="6" r="2.5" fill="#111111"/>
+                        </g>
+                        <!-- Label -->
+                        <text x="200" y="412" text-anchor="middle" fill="#999999" font-family="'IBM Plex Mono', monospace" font-size="9" letter-spacing="1.5">SOB MEDIDA</text>
+                    </g>
+
+                    <!-- Center Orbital -->
+                    <g transform="translate(140, 165)">
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="#E8570F" stroke-width="4"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="#E8570F" stroke-width="3.5" transform="rotate(60 60 60)" opacity="0.65"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="#E8570F" stroke-width="3" transform="rotate(120 60 60)" opacity="0.35"></ellipse>
+                        <circle cx="60" cy="60" r="6" fill="#E8570F"></circle>
+                    </g>
+                </svg>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Ticker -->
+    <section class="bg-[#0A0A0A] border-y border-[#1A1A1A] py-8 overflow-hidden flex flex-col items-center">
+        <span class="font-mono text-xs uppercase tracking-widest text-[#777777] mb-6 reveal">Tecnologias que impulsionam nossas soluções</span>
+        
+        <div class="relative w-full flex overflow-hidden">
+            <div class="animate-marquee whitespace-nowrap flex items-center gap-12 text-[#777777] font-mono text-sm">
+                <!-- Google Ads -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M3.9998 22.9291C1.7908 22.9291 0 21.1383 0 18.9293s1.7908-3.9998 3.9998-3.9998 3.9998 1.7908 3.9998 3.9998-1.7908 3.9998-3.9998 3.9998zm19.4643-6.0004L15.4632 3.072C14.3586 1.1587 11.9121.5028 9.9988 1.6074S7.4295 5.1585 8.5341 7.0718l8.0009 13.8567c1.1046 1.9133 3.5511 2.5679 5.4644 1.4646 1.9134-1.1046 2.568-3.5511 1.4647-5.4644zM7.5137 4.8438L1.5645 15.1484A4.5 4.5 0 0 1 4 14.4297c2.5597-.0075 4.6248 2.1585 4.4941 4.7148l3.2168-5.5723-3.6094-6.25c-.4499-.7793-.6322-1.6394-.5878-2.4784z"/></svg>
+                    <span>Google Ads</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Replicate -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M24 10.262v2.712h-9.518V24h-3.034V10.262zm0-5.131v2.717H8.755V24H5.722V5.131zM24 0v2.717H3.034V24H0V0z"/></svg>
+                    <span>Replicate</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Vercel -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="m12 1.608 12 20.784H0Z"/></svg>
+                    <span>Vercel</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Notion -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>
+                    <span>Notion</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Gemini -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+                    <span>Gemini</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Anthropic -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+                    <span>Anthropic</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- ChatGPT / OpenAI -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                    <span>ChatGPT</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Claude -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>
+                    <span>Claude</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- N8N -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></svg>
+                    <span>N8N</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Meta -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg>
+                    <span>Meta AI</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+
+                <!-- Duplicate for seamless loop -->
+
+                <!-- Google Ads -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M3.9998 22.9291C1.7908 22.9291 0 21.1383 0 18.9293s1.7908-3.9998 3.9998-3.9998 3.9998 1.7908 3.9998 3.9998-1.7908 3.9998-3.9998 3.9998zm19.4643-6.0004L15.4632 3.072C14.3586 1.1587 11.9121.5028 9.9988 1.6074S7.4295 5.1585 8.5341 7.0718l8.0009 13.8567c1.1046 1.9133 3.5511 2.5679 5.4644 1.4646 1.9134-1.1046 2.568-3.5511 1.4647-5.4644zM7.5137 4.8438L1.5645 15.1484A4.5 4.5 0 0 1 4 14.4297c2.5597-.0075 4.6248 2.1585 4.4941 4.7148l3.2168-5.5723-3.6094-6.25c-.4499-.7793-.6322-1.6394-.5878-2.4784z"/></svg>
+                    <span>Google Ads</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Replicate -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M24 10.262v2.712h-9.518V24h-3.034V10.262zm0-5.131v2.717H8.755V24H5.722V5.131zM24 0v2.717H3.034V24H0V0z"/></svg>
+                    <span>Replicate</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Vercel -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="m12 1.608 12 20.784H0Z"/></svg>
+                    <span>Vercel</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Notion -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>
+                    <span>Notion</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Gemini -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81"/></svg>
+                    <span>Gemini</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Anthropic -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M17.3041 3.541h-3.6718l6.696 16.918H24Zm-10.6082 0L0 20.459h3.7442l1.3693-3.5527h7.0052l1.3693 3.5528h3.7442L10.5363 3.5409Zm-.3712 10.2232 2.2914-5.9456 2.2914 5.9456Z"/></svg>
+                    <span>Anthropic</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- ChatGPT / OpenAI -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                    <span>ChatGPT</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Claude -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>
+                    <span>Claude</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- N8N -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632"/></svg>
+                    <span>N8N</span>
+                </span>
+                <span class="text-[#333333]">·</span>
+                <!-- Meta -->
+                <span class="flex items-center gap-2.5 opacity-40 hover:opacity-100 transition-opacity duration-300">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#777"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg>
+                    <span>Meta AI</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario (Editorial) -->
+    <section class="py-32 relative">
+        <div class="absolute inset-0 glow-ember opacity-40 max-w-[400px] mx-auto z-0"></div>
+        <div class="max-w-[640px] mx-auto px-8 relative z-10 text-center md:text-left">
+            
+            <span class="font-mono text-xs uppercase tracking-widest text-[#555555] block mb-8 reveal">O Cenário</span>
+            
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter leading-tight mb-12 text-balance reveal" style="transition-delay: 100ms;">
+                Ferramentas, qualquer empresa tem.<br>
+                Inteligência aplicada ao seu negócio, <em class="text-[#E8570F] not-italic italic font-semibold">não.</em>
+            </h2>
+            
+            <div class="text-[#999999] text-base leading-relaxed space-y-6 reveal" style="transition-delay: 200ms;">
+                <p>O mercado está cheio de soluções prontas que não conhecem a sua operação.</p>
+                <p>A Evollure não promete. Constrói. Do diagnóstico à entrega. Do zero. Funcionando.</p>
+            </div>
+            
+            <div class="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-[#E8570F] to-transparent my-12 opacity-50 reveal" style="transition-delay: 300ms;"></div>
+            
+            <p class="text-xl md:text-2xl font-semibold reveal" style="transition-delay: 400ms;">
+                Não adaptamos soluções prontas.<br>
+                Construímos <em class="text-[#E8570F] not-italic italic font-semibold">a sua.</em>
+            </p>
+            
+        </div>
+    </section>
+
+    <!-- 4 Pillars Method (Replacing "Como Trabalhamos") -->
+    <section class="bg-[#0A0A0A] py-32 border-y border-[#1A1A1A]" id="solucoes">
+        <div class="max-w-[960px] mx-auto px-8">
+            <div class="mb-16">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#555555] block mb-4 reveal">Método Evollure</span>
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter reveal" style="transition-delay: 100ms;">
+                    Os 4 pilares do Método Evollure.
+                </h2>
+            </div>
+
+            <!-- Fallback Grid Layout for stability -->
+            <div class="grid md:grid-cols-2 gap-6 relative">
+                
+                <!-- Center Decoration (Simplified) -->
+                <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-[#111111] rounded-full border border-[#242424] items-center justify-center z-20">
+                    <svg viewBox="0 0 120 120" class="w-8 h-8 text-[#E8570F]">
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="4"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3" transform="rotate(60 60 60)" opacity="0.6"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(120 60 60)" opacity="0.3"></ellipse>
+                        <circle cx="60" cy="60" r="8" fill="currentColor"></circle>
+                    </svg>
+                </div>
+
+                <!-- Cards -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-8 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal z-10">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-semibold">Imersão no seu negócio</h3>
+                        <span class="font-mono text-sm text-[#E8570F]">01</span>
+                    </div>
+                    <p class="text-sm text-[#999999] leading-relaxed">
+                        Entendemos a fundo seus processos, gargalos e onde a inteligência artificial gera impacto real. Não começamos pelo código. Começamos por você.
+                    </p>
+                </div>
+
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-8 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal z-10" style="transition-delay: 150ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-semibold">Diagnóstico estratégico</h3>
+                        <span class="font-mono text-sm text-[#E8570F]">02</span>
+                    </div>
+                    <p class="text-sm text-[#999999] leading-relaxed">
+                        Mapeamos onde a IA entra com mais força e menos esforço operacional. Sem achismo. Com dados e clareza de retorno.
+                    </p>
+                </div>
+
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-8 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal z-10" style="transition-delay: 300ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-semibold">Desenvolvimento sob medida</h3>
+                        <span class="font-mono text-sm text-[#E8570F]">03</span>
+                    </div>
+                    <p class="text-sm text-[#999999] leading-relaxed">
+                        Construímos soluções de IA e estratégias de aquisição personalizadas. Alinhadas à sua operação, aos seus critérios e objetivos.
+                    </p>
+                </div>
+
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-8 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal z-10" style="transition-delay: 450ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-semibold">Escala com resultados</h3>
+                        <span class="font-mono text-sm text-[#E8570F]">04</span>
+                    </div>
+                    <p class="text-sm text-[#999999] leading-relaxed">
+                        Cada solução entregue gera ganhos mensuráveis. Automáticos. Sustentáveis. Visíveis no dashboard e no caixa da empresa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto (Respiro) -->
+    <section class="py-40">
+        <div class="max-w-[640px] mx-auto px-8 text-center flex flex-col items-center">
+            
+            <p class="text-base text-[#999999] mb-3 reveal">Não acreditamos em IA genérica.</p>
+            <p class="text-base text-[#999999] mb-3 reveal" style="transition-delay: 150ms;">Não acreditamos em automação sem contexto.</p>
+            <p class="text-base text-[#999999] reveal" style="transition-delay: 300ms;">Não acreditamos em soluções que não geram números claros.</p>
+            
+            <div class="h-px w-[60px] bg-[#242424] my-12 reveal" style="transition-delay: 450ms;"></div>
+            
+            <p class="text-lg md:text-xl font-semibold text-white text-balance leading-relaxed reveal" style="transition-delay: 600ms;">
+                A Evollure existe para transformar complexidade operacional em eficiência mensurável e estratégica.
+            </p>
+            
+        </div>
+    </section>
+
+    <!-- Before vs After -->
+    <section class="py-32 relative bg-grid">
+        <div class="max-w-[960px] mx-auto px-8 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter mb-16 text-center reveal">
+                Antes vs Depois da Evollure.
+            </h2>
+
+            <div class="space-y-6">
+                <!-- Row 1 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 reveal">
+                    <div class="w-full md:w-[45%] bg-[#0A0A0A] border border-[#1A1A1A] p-6 rounded-none relative">
+                        <span class="absolute top-0 right-0 bg-[#EF4444]/10 text-[#EF4444] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Antes</span>
+                        <p class="text-sm text-[#777777]">Tentando entender IA no meio do hype e das promessas vazias</p>
+                    </div>
+                    
+                    <div class="text-[#E8570F] hidden md:block">
+                        <iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon>
+                    </div>
+                    <div class="text-[#E8570F] md:hidden my-2">
+                        <iconify-icon icon="solar:arrow-down-linear" width="20"></iconify-icon>
+                    </div>
+
+                    <div class="w-full md:w-[45%] bg-[#E8570F]/5 border border-[#E8570F]/20 hover:border-[#E8570F] transition-colors p-6 rounded-none relative group">
+                        <span class="absolute top-0 right-0 bg-[#E8570F]/10 text-[#E8570F] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Depois</span>
+                        <p class="text-sm text-[#DDDDDD] group-hover:text-white transition-colors">Agentes de IA sob medida, criados para atuar na sua rotina e nos processos específicos</p>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 reveal" style="transition-delay: 150ms;">
+                    <div class="w-full md:w-[45%] bg-[#0A0A0A] border border-[#1A1A1A] p-6 rounded-none relative">
+                        <span class="absolute top-0 right-0 bg-[#EF4444]/10 text-[#EF4444] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Antes</span>
+                        <p class="text-sm text-[#777777]">Gastando tempo e dinheiro com processos manuais e retrabalho</p>
+                    </div>
+                    
+                    <div class="text-[#E8570F] hidden md:block"><iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon></div>
+                    <div class="text-[#E8570F] md:hidden my-2"><iconify-icon icon="solar:arrow-down-linear" width="20"></iconify-icon></div>
+
+                    <div class="w-full md:w-[45%] bg-[#E8570F]/5 border border-[#E8570F]/20 hover:border-[#E8570F] transition-colors p-6 rounded-none relative group">
+                        <span class="absolute top-0 right-0 bg-[#E8570F]/10 text-[#E8570F] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Depois</span>
+                        <p class="text-sm text-[#DDDDDD] group-hover:text-white transition-colors">Processos críticos automatizados, custos reduzidos, equipe em alto impacto</p>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 reveal" style="transition-delay: 300ms;">
+                    <div class="w-full md:w-[45%] bg-[#0A0A0A] border border-[#1A1A1A] p-6 rounded-none relative">
+                        <span class="absolute top-0 right-0 bg-[#EF4444]/10 text-[#EF4444] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Antes</span>
+                        <p class="text-sm text-[#777777]">Contratando mais pessoas para dar conta do crescimento</p>
+                    </div>
+                    
+                    <div class="text-[#E8570F] hidden md:block"><iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon></div>
+                    <div class="text-[#E8570F] md:hidden my-2"><iconify-icon icon="solar:arrow-down-linear" width="20"></iconify-icon></div>
+
+                    <div class="w-full md:w-[45%] bg-[#E8570F]/5 border border-[#E8570F]/20 hover:border-[#E8570F] transition-colors p-6 rounded-none relative group">
+                        <span class="absolute top-0 right-0 bg-[#E8570F]/10 text-[#E8570F] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Depois</span>
+                        <p class="text-sm text-[#DDDDDD] group-hover:text-white transition-colors">Operações escaladas sem aumentar o time, com IA trabalhando 24/7</p>
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 reveal" style="transition-delay: 450ms;">
+                    <div class="w-full md:w-[45%] bg-[#0A0A0A] border border-[#1A1A1A] p-6 rounded-none relative">
+                        <span class="absolute top-0 right-0 bg-[#EF4444]/10 text-[#EF4444] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Antes</span>
+                        <p class="text-sm text-[#777777]">Recebendo dados sem saber como transformá-los em estratégia</p>
+                    </div>
+                    
+                    <div class="text-[#E8570F] hidden md:block"><iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon></div>
+                    <div class="text-[#E8570F] md:hidden my-2"><iconify-icon icon="solar:arrow-down-linear" width="20"></iconify-icon></div>
+
+                    <div class="w-full md:w-[45%] bg-[#E8570F]/5 border border-[#E8570F]/20 hover:border-[#E8570F] transition-colors p-6 rounded-none relative group">
+                        <span class="absolute top-0 right-0 bg-[#E8570F]/10 text-[#E8570F] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Depois</span>
+                        <p class="text-sm text-[#DDDDDD] group-hover:text-white transition-colors">Dados transformados em insights acionáveis, decisões rápidas e precisas</p>
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="flex flex-col md:flex-row items-center gap-4 reveal" style="transition-delay: 600ms;">
+                    <div class="w-full md:w-[45%] bg-[#0A0A0A] border border-[#1A1A1A] p-6 rounded-none relative">
+                        <span class="absolute top-0 right-0 bg-[#EF4444]/10 text-[#EF4444] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Antes</span>
+                        <p class="text-sm text-[#777777]">Dependendo de soluções genéricas que não se adaptam à operação</p>
+                    </div>
+                    
+                    <div class="text-[#E8570F] hidden md:block"><iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon></div>
+                    <div class="text-[#E8570F] md:hidden my-2"><iconify-icon icon="solar:arrow-down-linear" width="20"></iconify-icon></div>
+
+                    <div class="w-full md:w-[45%] bg-[#E8570F]/5 border border-[#E8570F]/20 hover:border-[#E8570F] transition-colors p-6 rounded-none relative group">
+                        <span class="absolute top-0 right-0 bg-[#E8570F]/10 text-[#E8570F] font-mono text-[10px] px-2 py-1 uppercase tracking-widest -mt-2 -mr-2">Depois</span>
+                        <p class="text-sm text-[#DDDDDD] group-hover:text-white transition-colors">Soluções integradas, adaptadas à sua operação e aos objetivos estratégicos</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom -->
+    <section class="bg-[#0A0A0A] py-32 border-y border-[#1A1A1A]" id="para-quem">
+        <div class="max-w-[960px] mx-auto px-8">
+            <span class="font-mono text-xs uppercase tracking-widest text-[#555555] block mb-6 reveal">Para quem é a Evollure</span>
+            
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter leading-tight mb-16 text-balance reveal" style="transition-delay: 100ms;">
+                Não importa o seu tipo de negócio,<br>
+                a Evollure foi feita <em class="text-[#E8570F] not-italic italic font-semibold">para você.</em>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group">
+                    <iconify-icon icon="solar:widget-5-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Franquias</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Padronize qualidade de vendas em todas as unidades. Mesmo script, mesmo critério, visibilidade total.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 100ms;">
+                    <iconify-icon icon="solar:shield-check-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Seguros e financeiro</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Calls complexas que exigem técnica, compliance rigoroso e forte argumentação de valor.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 200ms;">
+                    <iconify-icon icon="solar:sun-2-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Energia solar</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Venda consultiva de alto ticket. Ciclo longo. Cada call precisa ser cirúrgica e bem direcionada.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 300ms;">
+                    <iconify-icon icon="solar:code-square-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">SaaS e tecnologia</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Demos, trials, onboarding. Meça aderência ao playbook estabelecido e otimize conversão.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 400ms;">
+                    <iconify-icon icon="solar:medical-kit-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Clínicas e saúde</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Agendamento é venda. Atendimento é retenção. Meça e melhore os dois simultaneamente.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 500ms;">
+                    <iconify-icon icon="solar:book-bookmark-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Educação e cursos</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Matrícula é venda. Contorno de objeções específicas. Técnica necessária para fechar turmas.</p>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 600ms;">
+                    <iconify-icon icon="solar:buildings-2-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Imobiliárias</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Cada lead é uma oportunidade única. Qualifique atendimentos, acelere visitas e feche mais contratos.</p>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="bg-[#111111] border border-[#1A1A1A] border-l-[3px] border-l-[#E8570F] p-6 hover:border-[#E8570F] hover:-translate-y-1 transition-all duration-300 reveal group" style="transition-delay: 700ms;">
+                    <iconify-icon icon="solar:settings-linear" class="text-2xl text-[#E8570F] mb-4 group-hover:scale-110 transition-transform"></iconify-icon>
+                    <h3 class="text-base font-semibold mb-2">Indústrias</h3>
+                    <p class="text-sm text-[#999999] leading-relaxed">Consistência e controle tanto no operacional quanto em negociações complexas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack -->
+    <section class="py-32">
+        <div class="max-w-[960px] mx-auto px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#555555] block mb-6 reveal">Como Entregamos</span>
+                
+                <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter mb-6 reveal" style="transition-delay: 100ms;">
+                    Tecnologia de ponta.<br>
+                    Execução <em class="text-[#E8570F] not-italic italic font-semibold">impecável.</em>
+                </h2>
+                
+                <p class="text-sm md:text-base text-[#999999] leading-relaxed reveal" style="transition-delay: 200ms;">
+                    Por trás de cada solução existe uma stack robusta, segura e escalável. Você não precisa saber o que roda por trás. Precisa saber que funciona, que é seguro, e que tem gente séria cuidando da sua operação.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-[#0A0A0A] border border-[#1A1A1A] p-6 text-center hover:border-[#E8570F] transition-colors duration-300 reveal group">
+                    <iconify-icon icon="solar:server-linear" class="text-xl text-[#777777] mb-4 group-hover:text-[#E8570F] transition-colors"></iconify-icon>
+                    <span class="font-mono text-[10px] text-[#E8570F] uppercase tracking-widest block mb-2">Cloud Robusta</span>
+                    <h3 class="text-sm font-semibold mb-2 text-white">Infra Estruturada</h3>
+                    <p class="text-xs text-[#999999] leading-relaxed">Deploy contínuo. Monitoramento. Escalabilidade sob demanda.</p>
+                </div>
+                
+                <div class="bg-[#0A0A0A] border border-[#1A1A1A] p-6 text-center hover:border-[#E8570F] transition-colors duration-300 reveal group" style="transition-delay: 100ms;">
+                    <iconify-icon icon="solar:shield-keyhole-linear" class="text-xl text-[#777777] mb-4 group-hover:text-[#E8570F] transition-colors"></iconify-icon>
+                    <span class="font-mono text-[10px] text-[#E8570F] uppercase tracking-widest block mb-2">LGPD Compliant</span>
+                    <h3 class="text-sm font-semibold mb-2 text-white">Segurança Total</h3>
+                    <p class="text-xs text-[#999999] leading-relaxed">Dados criptografados. Compliance total. Zero vazamento.</p>
+                </div>
+                
+                <div class="bg-[#0A0A0A] border border-[#1A1A1A] p-6 text-center hover:border-[#E8570F] transition-colors duration-300 reveal group" style="transition-delay: 200ms;">
+                    <iconify-icon icon="solar:tuning-square-2-linear" class="text-xl text-[#777777] mb-4 group-hover:text-[#E8570F] transition-colors"></iconify-icon>
+                    <span class="font-mono text-[10px] text-[#E8570F] uppercase tracking-widest block mb-2">Sob Medida</span>
+                    <h3 class="text-sm font-semibold mb-2 text-white">Código Nativo</h3>
+                    <p class="text-xs text-[#999999] leading-relaxed">Código proprietário. Engenharia pro seu negócio. Não é plugin.</p>
+                </div>
+                
+                <div class="bg-[#0A0A0A] border border-[#1A1A1A] p-6 text-center hover:border-[#E8570F] transition-colors duration-300 reveal group" style="transition-delay: 300ms;">
+                    <iconify-icon icon="solar:headphones-round-sound-linear" class="text-xl text-[#777777] mb-4 group-hover:text-[#E8570F] transition-colors"></iconify-icon>
+                    <span class="font-mono text-[10px] text-[#E8570F] uppercase tracking-widest block mb-2">Suporte Dedicado</span>
+                    <h3 class="text-sm font-semibold mb-2 text-white">Acompanhamento</h3>
+                    <p class="text-xs text-[#999999] leading-relaxed">Onboarding assistido. Canal direto. Gente real focada em você.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-[#0A0A0A] py-32 border-y border-[#1A1A1A]" id="faq">
+        <div class="max-w-[680px] mx-auto px-8">
+            <span class="font-mono text-xs uppercase tracking-widest text-[#555555] block mb-6 text-center reveal">Perguntas Frequentes</span>
+            
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter mb-16 text-center reveal" style="transition-delay: 100ms;">
+                Dúvidas? A gente responde<br>
+                <em class="text-[#E8570F] not-italic italic font-semibold">sem rodeio.</em>
+            </h2>
+
+            <div class="space-y-1 reveal" style="transition-delay: 200ms;" id="faq-container">
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">O que é a Evollure Group?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Uma AI Sales Agency. Aplicamos inteligência artificial sob medida em operações comerciais. Da geração de demanda, tarefas operacionais, dados até análise de cada conversa de vendas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">O que é o Evollure Intelligence?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Nosso produto principal. Analisa automaticamente cada call do time de vendas contra os critérios definidos pela sua empresa. Scores, rankings, tendências e insights de coaching em um dashboard.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Vocês fazem marketing e mídia paga?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Sim. Estratégia de aquisição e mídia de performance potencializada por IA. Google, Meta, LinkedIn. Segmentação inteligente, otimização de criativos e rastreamento até a conversão. Brasil e exterior.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">O que significa "sob medida"?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Não temos produto de prateleira. Cada solução é construída do zero em torno da operação do cliente. Critérios, automações, integrações, estratégia. Tudo desenhado pro seu negócio.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Preciso de conhecimento técnico?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Nenhum. Onboarding 100% assistido. Configuramos tudo. Treinamos a equipe. Você usa o dashboard e toma decisão. O técnico fica com a gente.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Funciona pra qualquer tipo de empresa?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Funciona pra qualquer operação que envolva conversa. Call, videochamada, atendimento. Se tem vendedor e tem conversa, a Evollure potencializa.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Quanto custa?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Depende do escopo. Não temos plano fixo. Cada proposta é construída após entendermos a operação. Fala com a gente pelo WhatsApp. Sem compromisso.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Meus dados estão seguros?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">100%. Infraestrutura cloud, criptografia em trânsito e em repouso, compliance com LGPD. Segurança é premissa, não feature.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Vocês atendem fora do Brasil?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">Sim. Operações em português e inglês. Mídia no Brasil e exterior. O Intelligence funciona em qualquer idioma.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[#1A1A1A] py-4 cursor-pointer group">
+                    <div class="flex justify-between items-center group-hover:text-[#E8570F] transition-colors">
+                        <h3 class="text-base font-semibold">Como começo?</h3>
+                        <iconify-icon icon="solar:add-circle-linear" class="faq-icon text-xl text-[#555555] transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-sm text-[#999999] pt-4 pb-2 leading-relaxed">WhatsApp. 15 minutos pra entender sua operação. Sem pitch. Sem slide de 40 páginas. Só conversa honesta.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="py-40 relative overflow-hidden bg-grid" id="cta">
+        <div class="absolute inset-0 glow-ember-strong opacity-100 z-0"></div>
+        
+        <!-- Large Background Orbital Knot -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] opacity-10 z-0 text-[#E8570F] pointer-events-none">
+            <svg viewBox="0 0 120 120" class="w-full h-full">
+                <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="4"></ellipse>
+                <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3.5" transform="rotate(60 60 60)" opacity="0.65"></ellipse>
+                <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3" transform="rotate(120 60 60)" opacity="0.35"></ellipse>
+                <circle cx="60" cy="60" r="6" fill="currentColor"></circle>
+            </svg>
+        </div>
+
+        <div class="max-w-[720px] mx-auto px-8 relative z-10 text-center">
+            
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter leading-tight mb-8 reveal text-balance">
+                O achismo tem prazo de validade.<br>
+                Fala com a <em class="text-[#E8570F] not-italic italic font-semibold">Evollure.</em>
+            </h2>
+            
+            <p class="text-base text-[#999999] mb-12 max-w-xl mx-auto leading-relaxed reveal" style="transition-delay: 200ms;">
+                15 minutos de conversa. Sem compromisso. Só uma análise honesta de como IA pode transformar a sua operação comercial.
+            </p>
+            
+            <div class="reveal" style="transition-delay: 400ms;">
+                <a href="#" class="inline-block bg-[#E8570F] text-white px-12 py-4 text-base font-semibold rounded-none hover:bg-white hover:text-[#050505] transition-colors duration-250 mb-6">
+                    Falar pelo WhatsApp
+                </a>
+                
+                <div class="font-mono text-[10px] text-[#777777] uppercase tracking-widest flex items-center justify-center gap-2">
+                    <span>15 minutos</span>
+                    <span>·</span>
+                    <span>Sem compromisso</span>
+                    <span>·</span>
+                    <span>Conversa direta</span>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] border-t border-[#1A1A1A] py-12">
+        <div class="max-w-[960px] mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <div class="flex items-center gap-[3px] text-white">
+                    <svg viewBox="0 0 120 120" class="w-5 h-5 text-[#E8570F]">
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="4"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="3" transform="rotate(60 60 60)" opacity="0.6"></ellipse>
+                        <ellipse cx="60" cy="60" rx="42" ry="18" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(120 60 60)" opacity="0.3"></ellipse>
+                        <circle cx="60" cy="60" r="8" fill="currentColor"></circle>
+                    </svg>
+                    <span class="text-base tracking-tight">Evollure</span>
+                </div>
+                <span class="font-mono text-[9px] uppercase tracking-widest text-[#555555]">AI Sales Agency</span>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-xs text-[#777777]">
+                <a href="#" class="hover:text-white transition-colors">Intelligence</a>
+                <a href="#" class="hover:text-white transition-colors">Nosso método</a>
+                <a href="#para-quem" class="hover:text-white transition-colors">Para Quem</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+                <a href="#cta" class="hover:text-white transition-colors">Contato</a>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-2 text-xs text-[#555555]">
+                <p>© 2026 Evollure Group.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#" class="hover:text-white transition-colors">YouTube</a>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const bar1 = document.getElementById('bar1');
+        const bar2 = document.getElementById('bar2');
+        const bar3 = document.getElementById('bar3');
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                bar1.style.transform = '';
+                bar2.style.opacity = '';
+                bar3.style.transform = '';
+            } else {
+                mobileMenu.classList.remove('hidden');
+                bar1.style.transform = 'translateY(7px) rotate(45deg)';
+                bar2.style.opacity = '0';
+                bar3.style.transform = 'translateY(-7px) rotate(-45deg)';
+            }
+        });
+
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                bar1.style.transform = '';
+                bar2.style.opacity = '';
+                bar3.style.transform = '';
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#0A0A0A]/85', 'backdrop-blur-md', 'border-[#1A1A1A]');
+                navbar.classList.remove('border-transparent');
+            } else {
+                navbar.classList.remove('bg-[#0A0A0A]/85', 'backdrop-blur-md', 'border-[#1A1A1A]');
+                navbar.classList.add('border-transparent');
+            }
+        });
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body></html>
